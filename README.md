@@ -1,3 +1,5 @@
+#OpenCV Implementation coming soon!
+
 # Blackjack Reinforcement Learning Agent
 
 This project is a reinforcement learning-based agent that learns to play Blackjack. The goal of the agent is to maximize its rewards through playing the game, by deciding whether to "hit" (draw a card) or "stick" (stop drawing cards) based on its current hand value and the dealer’s visible card's value.
