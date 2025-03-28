@@ -67,6 +67,7 @@ def evaluate_model(model_path, num_episodes=1000):
         print(f"{key}: {value:.4f}")
     
     env.close()
+    logging.info(f"{metrics}")
     return metrics
 
 # Evaluate the saved model
