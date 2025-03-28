@@ -2,5 +2,5 @@ opencv-python
 gym
 matlplotlib
 numpy
-stable-baselines3[extra]
+stable-baselines3[extra] torch
 #-e .
