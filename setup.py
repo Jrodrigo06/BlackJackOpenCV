@@ -17,7 +17,7 @@ def get_requirements(file_path:str)->List[str]:
     return requirements
 
 setup(
-name='mlproject', 
+name='BlackJackOpenCV', 
 version='0.0.1',
 author='Jerome',
 author_email = 'jeromerodrigo06@gmail.com',

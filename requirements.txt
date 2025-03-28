@@ -1,3 +1,6 @@
-multiset
 opencv-python
+gym
+matlplotlib
+numpy
+stable-baselines3[extra]
 #-e .
