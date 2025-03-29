@@ -3,7 +3,7 @@ import numpy as np
 from stable_baselines3 import DQN
 from stable_baselines3.common.vec_env import DummyVecEnv
 from src.model_training.blackjack_env import BlackjackEnv
-from src.logger import logging
+from src.utils.logger import logging
 
 def evaluate_model(model_path, num_episodes=1000):
     # Wrap the environment in a vector environment

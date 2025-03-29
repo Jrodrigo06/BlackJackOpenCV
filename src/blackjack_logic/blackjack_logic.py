@@ -1,5 +1,5 @@
-from src.exception import customException
-from src.logger import logging
+from src.utils.exception import customException
+from src.utils.logger import logging
 import random
 
 class Deck:
