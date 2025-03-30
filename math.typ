@@ -1,4 +1,5 @@
-#import "@preview/fletcher:0.5.5"
+#import "@preview/fletcher:0.5.7" as fletcher: diagram, node, edge
+
 
 #import "@preview/charged-ieee:0.1.3": ieee
 
@@ -15,7 +16,8 @@
       location: [Boston, MA],
       email: "rodrigo.j@northeastern.edu"
     ),
-)
+  ),
+  figure-supplement: [Fig.]
 )
 
 = Introduction
@@ -27,12 +29,49 @@ I then started to implement Reinforcement Learning using Open AI's Gymnasium, an
 
 == What is Q-Learning?
 To start Q-Learning is a value based algorithim which means it uses a value function to determine the reward and from there it figures out the optimal policy, which is the best action to take given the state. Q-learning uses state-action value functions where both the state current setup of the game (i.e the dealer has 11 and the player has 10) and the action (hit or stay) are used to determine a number) which is the Q-value, quantifying _How good it is to be in the state s and take an action a given this state?_ The goal of Q learning is to get the best Q-function to maximize the reward, finding the optimal policy. Typically the agent/AI will start with an abritrary Q-function, and an exploration policy, where it'll randomly explore the enviroment. The Q-function is updated using the Bellman equation. \ \
-=== Bellman Equation for Q-Learning
+=== Adjusted Bellman Equation for Q-Learning
 $
-  V(S#sub[1]) = max_a [sum_s' P(s'|s, = S#sub[1] , a) V(s')]
+  Q(s,a) = sum_s' P(s'|s, a) [R(s,a) + max_a' Q(s', a')]
 $
-
 While this function looks complicated, it is quite simple. The left side is the value function and it's a recursive function where it finds the maximum future value over all possible actions. The summation of probablities is there due to stochasticity of the environment. This is due to the fact that the next state is not guarnteed with the action taken, for example in blackjack the next state isn't guranteed with a hit (i.e. you have 10 the next card is not guranteed to be an ace), as the next card pulled is random. The summation accounts for all possible future states, weighted by their probabilities, in order to evaluate the expected value of taking each action.
 
 == Deep Q-Networks (DQN)
-So I opted for Deep-Q-Networks due to the stochastic nature of BlackJack, in standard Q-learning I would have to make Q-table/function for every possible state-action pair. The number of possible states is huge due to the nature of blackjack's random drawing, creating a Q-table for blackjack wouldn't be feasibly due to all the possibilites you'd have to account for.
+So I opted for Deep-Q-Networks due to the stochastic nature of BlackJack, in standard Q-learning I would have to make Q-table/function for every possible state-action pair. The number of possible states is huge due to the nature of blackjack's random drawing, creating a Q-table for blackjack wouldn't be feasibly due to all the possibilites you'd have to account for. 
+
+#let bent-edge(from, to, ..args) = {
+  let midpoint = (from, 50%, to)
+  let vertices = (
+    from,
+    (from, "|-", midpoint),
+    (midpoint, "-|", to),
+    to,
+  )
+  edge(..vertices, "-|>", ..args)
+}
+
+#diagram(
+  node-stroke: luma(80%),
+  edge-corner-radius: none,
+  spacing: (10pt, 20pt),
+
+  // Nodes
+  node((1.5,0), [*Start (10, Dealer 6)*], name: <a>),
+  node((0.5,1), [*Stay (Final: 10)*], name: <b>),
+  node((2.5,1), [*Hit: Draws a 2*], name: <c>),
+
+  node((0,2), [*Win*], name: <d>),
+  node((1,2), [*Lose*], name: <e>),
+
+  node((2,2), [*Hit: Draws a 4*], name: <f>),
+  node((3,2), [*Stay*], name: <g>),
+  node((2,3), [*...*], name: <h>),
+
+  // Edges
+  bent-edge(<a>, <b>),
+  bent-edge(<a>, <c>),
+  bent-edge(<b>, <d>),
+  bent-edge(<b>, <e>),
+  bent-edge(<c>, <f>),
+  bent-edge(<c>, <g>),
+  bent-edge(<f>, <h>),
+)
