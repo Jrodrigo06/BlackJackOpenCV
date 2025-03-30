@@ -1,6 +1,6 @@
 opencv-python
 gym
-matlplotlib
 numpy
-stable-baselines3[extra] torch
+stable-baselines3[extra]
+typst
 #-e .
